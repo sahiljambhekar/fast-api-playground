@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/sahiljambhekar/fast-api-playground:worldpop-latest
+    image: ghcr.io/sahiljambhekar/fast-api-playground:worldpop-0.1.0
     build:
       context: .
       dockerfile: Dockerfile
