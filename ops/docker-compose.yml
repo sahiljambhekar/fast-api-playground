@@ -7,7 +7,7 @@ services:
     container_name: worldpop
     ports:
       - "127.0.0.1:8085:85"
-      - "127.0.0.1:50051:50051"
+      - "127.0.0.1:8051:50051"
     deploy:
       resources:
         limits:

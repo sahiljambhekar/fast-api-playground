@@ -1,8 +1,14 @@
 ### Http
 Over http, we were able to achive P99 of `18ms` with `1K QPS` on just `1vCPU` of for API and `0.5 vCPU` for `Redis` 
 ```bash
-oha -z 25s -c 5 --rand-regex-url "http://localhost:8085/cities/random\\?num=[1-9]{1,4}" 
+# http
+oha -z 25s -c 5 --rand-regex-url \
+"http://localhost:8085/cities/random\\?num=[1-9]{1,4}"
+
+# grpc
+ghz --insecure --proto src/worldpop/pb/random_city.proto --call randomcity.RandomCityService.GetRandomCity -d '{"num": 500 }' -c 5 -r 1000 -n 25000 localhost:51 
 ```
+
 | Commit  | Http                      | Grpc                      |
 |---------|---------------------------|---------------------------|
 | 8ff45db | ![Http Perf](http.png)    | ![GRPC Perf](grpc.png)    |
