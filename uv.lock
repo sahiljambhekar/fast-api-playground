@@ -375,7 +375,6 @@ dependencies = [
     { name = "redis", extra = ["hiredis"], marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
     { name = "requests", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
     { name = "ruff", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
-    { name = "twirp", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
 ]
 
 [package.optional-dependencies]
@@ -410,7 +409,6 @@ requires-dist = [
     { name = "requests", specifier = ">=2.32.3" },
     { name = "ruff", specifier = ">=0.6.4" },
     { name = "setuptools", marker = "extra == 'build'" },
-    { name = "twirp" },
 ]
 
 [[package]]
@@ -1377,15 +1375,6 @@ wheels = [
 ]
 
 [[package]]
-name = "structlog"
-version = "24.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/78/a3/e811a94ac3853826805253c906faa99219b79951c7d58605e89c79e65768/structlog-24.4.0.tar.gz", hash = "sha256:b27bfecede327a6d2da5fbc96bd859f114ecc398a6389d664f62085ee7ae6fc4", size = 1348634 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/bf/65/813fc133609ebcb1299be6a42e5aea99d6344afb35ccb43f67e7daaa3b92/structlog-24.4.0-py3-none-any.whl", hash = "sha256:597f61e80a91cc0749a9fd2a098ed76715a1c8a01f73e336b746504d1aad7610", size = 67180 },
-]
-
-[[package]]
 name = "taskgroup"
 version = "0.0.0a4"
 source = { registry = "https://pypi.org/simple" }
@@ -1422,20 +1411,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/17/d1/a83dee5be404da7afe5a71783a33b8907bacb935a6dc8c69ab785e4a3eed/trio-0.27.0.tar.gz", hash = "sha256:1dcc95ab1726b2da054afea8fd761af74bad79bd52381b84eae408e983c76831", size = 568064 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3c/83/ec3196c360afffbc5b342ead48d1eb7393dd74fa70bca75d33905a86f211/trio-0.27.0-py3-none-any.whl", hash = "sha256:68eabbcf8f457d925df62da780eff15ff5dc68fd6b367e2dde59f7aaf2a0b884", size = 481734 },
-]
-
-[[package]]
-name = "twirp"
-version = "0.0.7"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "protobuf", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
-    { name = "requests", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
-    { name = "structlog", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4c/e1/ebb06fa8f7164ff7f81d5cd78a74b768373480c417b2837d94a5943872b6/twirp-0.0.7.tar.gz", hash = "sha256:692b055d5da6e8ec29ded5dc93682c3ed5ec608bb9cb14529139a3b31cc2a44a", size = 11353 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/f5/a8/12092a50daa826b692e79a199c3f55921ce5a9cd67bed8e454bcdbbf9fdb/twirp-0.0.7-py3-none-any.whl", hash = "sha256:978294787f07d9f5489e6e32ef050d4d8b619bdffcbe80b248797518b4f69871", size = 12437 },
 ]
 
 [[package]]
