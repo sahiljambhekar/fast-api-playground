@@ -1,0 +1,43 @@
+services:
+  app:
+    image: docker.io/sahiljam/worldpop:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: worldpop
+    ports:
+      - "127.0.0.1:8085:85"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '1'
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      SERVICE_TYPE: grpc
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - "${HOME}/data/redis/async-await:/data"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+  # prometheus:
+  #   image: prom/prometheus
+  #   volumes:
+  #     - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+  #   ports:
+  #     - "127.0.0.1:9090:9090"
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 128M
+  #         cpus: '0.1'
+volumes:
+  redis-data:

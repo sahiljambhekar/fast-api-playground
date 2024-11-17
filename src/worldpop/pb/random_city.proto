@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package randomcity;
+
+service RandomCityService {
+  rpc GetRandomCity (RandomCityRequest) returns (RandomCityResponse);
+}
+
+message RandomCityRequest {
+  int32 num = 1;
+}
+
+message RandomCityResponse {
+  repeated string random_cities = 1;
+  string random_state = 2;
+  string time_taken = 3;
+}

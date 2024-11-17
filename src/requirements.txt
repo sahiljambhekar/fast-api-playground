@@ -1,0 +1,8 @@
+redis[hiredis]
+fastapi[standard]
+prometheus-fastapi-instrumentator
+anyio[trio]
+numpy
+grpcio
+grpcio-tools
+grpc-interceptor
