@@ -1,12 +1,13 @@
 services:
   app:
-    image: docker.io/sahiljam/worldpop:latest
+    image: ghcr.io/sahiljambhekar/fast-api-playground:worldpop-latest
     build:
       context: .
       dockerfile: Dockerfile
     container_name: worldpop
     ports:
       - "127.0.0.1:8085:85"
+      - "127.0.0.1:50051:50051"
     deploy:
       resources:
         limits:
@@ -14,7 +15,7 @@ services:
           cpus: '1'
     environment:
       REDIS_URL: redis://redis:6379/0
-      SERVICE_TYPE: grpc
+      SERVICE_TYPE: http,grpc
 
   redis:
     image: redis:latest

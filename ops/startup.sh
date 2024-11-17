@@ -2,7 +2,7 @@
 
 # Default to http if not set
 SERVICE_TYPE=${SERVICE_TYPE:-"http"}
-
+source .venv/bin/activate
 case ${SERVICE_TYPE} in
   "http")
     echo "Starting http service..."

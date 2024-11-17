@@ -1,7 +1,7 @@
 [project]
-name = "async-await"
+name = "fast-api-playground"
 version = "0.1.0"
-description = "Play around with async await"
+description = "Play around with FastAPI"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
