@@ -1,24 +1,25 @@
-# Use an official Python runtime as a parent image
-#FROM python:3.10-slim
-#FROM ghcr.io/astral-sh/uv:python3.10-alpine
-FROM ghcr.io/astral-sh/uv:python3.10-bookworm
-# Install build dependencies, for grpc tools
+# Build stage
+FROM ghcr.io/astral-sh/uv:python3.10-bookworm AS builder
 RUN apt-get update && apt-get install -y build-essential
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-ADD src/worldpop/ /app/
-COPY ops/startup.sh /app/
 COPY pyproject.toml /app/
 
-# Install any needed packages specified in requirements.txt
 RUN uv sync
 
-# Make port 80 available to the world outside this container for HTTP
-# Make port 50051 available to the world outside this container for gRPC
-EXPOSE 80 50051
+# Runtime stage
+FROM ghcr.io/astral-sh/uv:python3.10-alpine
 
-# Run Either HTTP or gRPC server
+# For Python C++ dependencies
+RUN apk add gcc musl-dev
+WORKDIR /app
+
+COPY --from=builder /app /app
+ADD src/worldpop/ /app/
+ADD config/*.toml /app/config/
+COPY ops/startup.sh /app/
+
+EXPOSE 85 50051
+
 CMD ["./startup.sh"]
