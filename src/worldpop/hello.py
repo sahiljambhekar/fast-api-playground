@@ -10,7 +10,6 @@ from models import (
     RootReply,
 )
 from prometheus_fastapi_instrumentator import Instrumentator, metrics
-import numpy as np
 
 
 async def setup_redis():
