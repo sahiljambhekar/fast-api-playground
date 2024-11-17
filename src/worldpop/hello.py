@@ -10,6 +10,8 @@ from models import (
     RootReply,
 )
 from prometheus_fastapi_instrumentator import Instrumentator, metrics
+import os, time
+from datetime import datetime
 
 
 async def setup_redis():
@@ -49,7 +51,7 @@ DEFAULT_BUCKETS = [
 app = FastAPI(
     lifespan=lifespan,
     title="Random City Generator",
-    version="0.1.0",
+    version="0.2.0",
     openapi_url="/openapi.json",
     docs_url="/docs",
     redoc_url="/redoc",
@@ -60,19 +62,24 @@ instrumentor = Instrumentator(
     excluded_handlers=["admin*", "/metrics", "/docs", "/openapi*"],
 )
 instrumentor.instrument(app, metric_namespace="fast_api").expose(app)
-instrumentor.add(
-    metrics.latency(
-        metric_name="duration_in_seconds_bucket",
-        metric_namespace="fast_api",
-        buckets=DEFAULT_BUCKETS,
+if os.getenv("METRICS_LATENCY", "false").lower() == "true":
+    instrumentor.add(
+        metrics.latency(
+            metric_name="duration_in_seconds_bucket",
+            metric_namespace="fast_api",
+            buckets=DEFAULT_BUCKETS,
+        )
     )
-)
 instrumentor.expose(app)
 
 
 @app.get("/", response_model=RootReply)
 def root() -> Dict[str, str]:
-    return RootReply(greeting="Hello,there", msg="Welcome, to random city generator!")
+    return RootReply(
+        greeting="Hello,there",
+        msg="Welcome to the Random City Generator",
+        time_str=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    )
 
 
 @app.get("/state/{state}/random_city", response_model=RandomCityResponse)
@@ -86,7 +93,9 @@ async def random_city_by_state(state: str, num: int = 1) -> RandomCityResponse:
     Returns:
         RandomCityResponse: A dictionary with the random city or None.
     """
-    result = await redis_helper.get_random_cities(state, num)
+    result = await redis_helper.get_random_cities_by_state(
+        state=state.strip().upper(), num=num
+    )
     return RandomCityResponse(**result)
 
 

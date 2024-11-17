@@ -1,6 +1,6 @@
 [project]
 name = "fast-api-playground"
-version = "0.1.0"
+version = "0.2.0"
 description = "Play around with FastAPI"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -23,7 +23,7 @@ dependencies = [
     "grpcio-tools>=1.68.0",
     "grpc-interceptor>=0.15.4",
     "h2>=4.1.0",
-    "hypercorn>=0.17.3",
+    "hypercorn[uvloop]>=0.17.3",
 ]
 
 [project.optional-dependencies]

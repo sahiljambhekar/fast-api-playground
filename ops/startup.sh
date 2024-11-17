@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Default to http if not set
 SERVICE_TYPE=${SERVICE_TYPE:-"http"}
@@ -10,8 +10,7 @@ case ${SERVICE_TYPE} in
     ;;
   "hyper")
     echo "Starting http1.1 service with hypercorn..."
-    hypercorn hello:app --bind 0.0.0.0:85 --log-level=critical
-    #fastapi run hello.py --no-reload --host 0.0.0.0 --port 85
+    hypercorn hello:app --log-level=critical --config config/hypercorn_config.toml
     ;;
   "grpc")
     echo "Starting gRPC service..."

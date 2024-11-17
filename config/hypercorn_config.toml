@@ -1,6 +1,15 @@
-insecure
-bind = "127.0.0.1:8095"  # Bind to all IPs on port 8000
-workers = 1            # Number of workers
-#http2 = True           # Enable HTTP/2
-certfile = "config/secrets/cert.pem"  # Optional: SSL Certificate
-keyfile = "config/secrets/key.pem"    # Optional: SSL Key
+workers = 1
+worker_class = "uvloop"
+bind = "0.0.0.0:85"
+
+# Performance Tuning
+backlog = 1024 # Maximum number of pending connections
+keep_alive_max_requests = 1200 # Maximum number of requests before connection is closed. HTTP/1 & HTTP/2 only.
+#max_requests = 1000
+max_requests_jitter = 50
+loglevel = "WARN"
+
+# cleanup
+graceful_timeout = 120 # Time for workers to finish processing i.e SIGTERM or Ctrl-C for any remaining requests (tasks) to complete.
+#shutdown_timeout = "5s" 
+#keep_alive_timeout = "1s" # How long to keep idle connections

@@ -21,3 +21,4 @@ class RandomStateResponse(BaseModel):
 class RootReply(BaseModel):
     greeting: str
     msg: str
+    time_str: str

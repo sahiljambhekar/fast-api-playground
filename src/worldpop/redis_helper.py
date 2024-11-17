@@ -12,7 +12,9 @@ class RedisHelper:
     def __init__(self) -> None:
         redis_url = os.getenv("REDIS_URL", "redis://localhost")
         print(f"Connecting to Redis at {redis_url}")
-        pool = redis.ConnectionPool.from_url(redis_url, max_connections=500)
+        pool = redis.ConnectionPool.from_url(
+            redis_url, max_connections=500, decode_responses=True
+        )
         self.redis_client = redis.Redis(connection_pool=pool)
 
     async def startup(self):
@@ -24,14 +26,13 @@ class RedisHelper:
         random_cities = await self.redis_client.srandmember(
             f"state:{state}", number=number
         )
-        result = [city.decode() for city in random_cities] if random_cities else []
-        return result
+        return random_cities
 
     async def get_random_state(self, number: int = 1) -> List[str]:
         random_states = await self.redis_client.srandmember("states", number=number)
-        result = [state.decode() for state in random_states] if random_states else []
-        return result
+        return random_states
 
+    @measure_time
     async def get_random_cities_by_state(
         self, state: str, num: int
     ) -> Dict[str, Union[str, list[str]]]:

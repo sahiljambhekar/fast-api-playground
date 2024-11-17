@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/sahiljambhekar/fast-api-playground:worldpop-0.1.0
+    image: ghcr.io/sahiljambhekar/fast-api-playground:worldpop-0.2.0
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,7 +15,7 @@ services:
           cpus: '1'
     environment:
       REDIS_URL: redis://redis:6379/0
-      SERVICE_TYPE: http,grpc
+      SERVICE_TYPE: hyper
 
   redis:
     image: redis:latest

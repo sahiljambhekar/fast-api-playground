@@ -1,0 +1,6 @@
+insecure
+bind = "0.0.0.0:85"  # Bind to all IPs on port 85
+workers = 1            # Number of workers
+#http2 = True           # Enable HTTP/2
+certfile = "config/secrets/cert.pem"  # Optional: SSL Certificate
+keyfile = "config/secrets/key.pem"    # Optional: SSL Key
