@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from redis_helper import RedisHelper
 from time import perf_counter
+import os
 from models import (
     RandomCityRandomStateResponse,
     RandomCityResponse,
@@ -10,7 +11,6 @@ from models import (
     RootReply,
 )
 from prometheus_fastapi_instrumentator import Instrumentator, metrics
-import os, time
 from datetime import datetime
 
 
