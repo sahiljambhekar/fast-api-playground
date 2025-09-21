@@ -1,6 +1,6 @@
 # fast-api-playground
-Just playing around with FastAPI based on their Docs, to see how fast can it be?
 
+Just playing around with FastAPI based on their Docs, to see how fast can it be?
 
 ## 🚀 How to Run This FastAPI Project
 
@@ -29,17 +29,52 @@ brew install uv
 ```sh
 uv sync
 ```
+
 This will install all dependencies as specified in `pyproject.toml` and lock them with `uv.lock`.
 
 ---
 
 ### 4. Run Redis (Locally)
 
-You can use Docker to run Redis:
+You can run Redis using Docker **or** natively on your Mac:
+
+#### **Option 1: Docker (Recommended)**
 
 ```sh
 docker run -d -p 6379:6379 redis:latest
 ```
+
+#### **Option 2: Docker Compose**
+
+From the `ops` directory:
+
+```sh
+cd ops
+docker compose up redis
+```
+
+#### **Option 3: Native Install (Homebrew)**
+
+If you prefer to install Redis directly:
+
+```sh
+brew install redis
+brew services start redis
+```
+
+Or run it manually:
+
+```sh
+redis-server
+```
+
+You can check if Redis is running with:
+
+```sh
+redis-cli ping
+```
+
+A running server will reply with `PONG`.
 
 ---
 
@@ -77,6 +112,7 @@ docker compose up --build
 ```
 
 This will start:
+
 - The FastAPI app (via Hypercorn)
 - Redis
 
@@ -98,14 +134,17 @@ SERVICE_TYPE=hyper ./ops/startup.sh
 ### 9. Useful Commands
 
 - **Build Docker image:**
-	```sh
-	cd ops
-	docker build -t fast-api-playground .
-	```
+
+ ```sh
+ cd ops
+ docker build -t fast-api-playground .
+ ```
+
 - **Stop all containers:**
-	```sh
-	docker compose down
-	```
+
+ ```sh
+ docker compose down
+ ```
 
 ---
 
@@ -117,6 +156,7 @@ SERVICE_TYPE=hyper ./ops/startup.sh
 ---
 
 ### References
+
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [uv Docs](https://astral.sh/uv/)
 - [Hypercorn Docs](https://pgjones.gitlab.io/hypercorn/)
@@ -126,4 +166,5 @@ SERVICE_TYPE=hyper ./ops/startup.sh
 ---
 
 ### Evaluations
+
 See [How Fast](./docs/how-fast.md)
