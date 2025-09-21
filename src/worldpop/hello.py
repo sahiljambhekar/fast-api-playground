@@ -61,7 +61,7 @@ instrumentor = Instrumentator(
     should_instrument_requests_inprogress=True,
     excluded_handlers=["admin*", "/metrics", "/docs", "/openapi*"],
 )
-instrumentor.instrument(app, metric_namespace="fast_api").expose(app)
+
 if os.getenv("METRICS_LATENCY", "false").lower() == "true":
     instrumentor.add(
         metrics.latency(
